@@ -55,6 +55,7 @@ python demo.py
 ```
 
 Current trained model have following output in test set (bolts and nuts).
+
 ![Expected Output](images/demo.gif)
 
 ## References
