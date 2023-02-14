@@ -30,7 +30,8 @@ checkpoint_callback = pl.callbacks.ModelCheckpoint(
 trainer = pl.Trainer(
     gpus=args.gpus,
     callbacks=[checkpoint_callback],
-    gradient_clip_val=args.gradient_clip_val)
+    gradient_clip_val=args.gradient_clip_val, 
+    max_epochs=args.max_epochs)
 
 class_names = ["bolt", "nut"]
 

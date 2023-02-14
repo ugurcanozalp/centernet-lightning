@@ -11,11 +11,11 @@ pip install -e .
 ## Training
 [Pytorch Lightning](https://www.pytorchlightning.ai/) is used for training. First, place data files into data folder. To train resnet18 model with bolts and nuts dataset, run the following command,
 ```bash
-python train_bolts_nuts.py --gpus 1
+python -m scripts.train_bolts_nuts --gpus 1 --max_epochs 20
 ```
 For testing the model, run the following command.
 ```bash
-python test_bolts_nuts.py --gpus 1
+python -m scripts.test_bolts_nuts --gpus 1
 ```
 
 Example of training resnet18 with bolts and nuts dataset using default hyperparameters, 
@@ -66,9 +66,9 @@ Current trained model have following output in test set (bolts and nuts).
 ## Possible future improvements
 This package is a new one, so some features extra features to be added.
 
-- [] Implement more augmentations in dataset classes. (Waiting for new version of torchvision)
-- [] Handle COCO dataset
-- [] Implement other backbones other than ResNet, like Hourglass, swin transformer etc. 
+- [ ] Implement more augmentations in dataset classes. (Waiting for new version of torchvision)
+- [ ] Handle COCO dataset
+- [ ] Implement other backbones other than ResNet, like Hourglass, swin transformer etc. 
 
 
 ## References
