@@ -4,6 +4,7 @@ import time
 
 import numpy as np
 import cv2
+import imageio
 import matplotlib.pyplot as plt
 
 from centernet.onnx_inference import ObjectDetector
@@ -20,6 +21,7 @@ detector = ObjectDetector("deployments/centernet_resnet18.onnx")
 cmap = plt.get_cmap("hsv")
 
 times = []
+frames = []
 while True:
     # Capture frame-by-frame
     ret, frame = cap.read()
@@ -46,11 +48,20 @@ while True:
                             cv2.FONT_HERSHEY_SIMPLEX, 0.6, (128, 128, 128), 1)
     cv2.imshow('frame', frame)
     times.append(time.time())
+    frames.append(frame)
     if cv2.waitKey(1) == ord('q'):
         break
 # When everything done, release the capture
 cap.release()
 cv2.destroyAllWindows()
+
+print("Saving GIF file")
+with imageio.get_writer("images/demo.gif", mode="I") as writer:
+    for idx, frame in enumerate(frames):
+        if idx%5==0:
+            print("Adding frame to GIF file: ", idx + 1)
+            writer.append_data(cv2.cvtColor(cv2.resize(frame, (320, 320)), cv2.COLOR_BGR2RGB))
+
 times = np.array(times)
 avg_fps = 1./np.diff(times).mean()
 print(f"Average FPS: {avg_fps}")

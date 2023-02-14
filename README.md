@@ -32,7 +32,6 @@ batch_ids, boxes, scores, labels = model(batch)
 
 ### Onnx Runtime Inference
 If you want to use onnx runtime, export the model using `export.py`. 
-
 ```
 python -m scripts.export --ckpt checkpoints/centernet_resnet18.pt.ckpt --quantized
 ```
@@ -54,6 +53,9 @@ You can use `demo.py` script for this purpose. Modify it according to your purpo
 ```
 python demo.py
 ```
+
+Current trained model have following output in test set (bolts and nuts).
+![Expected Output](images/demo.gif)
 
 ## References
 - [Objects as Points](https://arxiv.org/pdf/1911.02116.pdf)

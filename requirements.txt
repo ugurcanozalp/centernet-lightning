@@ -6,3 +6,5 @@ onnxruntime>=1.14.0
 pycocotools>=2.0.6
 opencv-python>=4.6.0.66
 numpy>=1.24.2
+imageio>=2.21.1
+pillow>=9.2.0
