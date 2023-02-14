@@ -237,17 +237,32 @@ resnet_spec = {18: (BasicBlock, [2, 2, 2, 2]),
                101: (Bottleneck, [3, 4, 23, 3]),
                152: (Bottleneck, [3, 8, 36, 3])}
 
-def resnet18():
-    return PoseResNet(BasicBlock, [2, 2, 2, 2])
+def resnet18(pretrained=True):
+    model = PoseResNet(BasicBlock, [2, 2, 2, 2])
+    if pretrained:
+        model.init_weights(18)
+    return model
 
-def resnet34():
-    return PoseResNet(BasicBlock, [3, 4, 6, 3])
+def resnet34(pretrained=True):
+    model = PoseResNet(BasicBlock, [3, 4, 6, 3])
+    if pretrained:
+        model.init_weights(34)
+    return model
 
-def resnet50():
-    return PoseResNet(Bottleneck, [3, 4, 6, 3])
+def resnet50(pretrained=True):
+    model = PoseResNet(Bottleneck, [3, 4, 6, 3])
+    if pretrained:
+        model.init_weights(50)
+    return model
 
-def resnet101():
-    return PoseResNet(Bottleneck, [3, 4, 23, 3])
+def resnet101(pretrained=True):
+    model = PoseResNet(Bottleneck, [3, 4, 23, 3])
+    if pretrained:
+        model.init_weights(101)
+    return model
 
-def resnet152():
-    return PoseResNet(Bottleneck, [3, 8, 36, 3])
+def resnet152(pretrained=True):
+    model = PoseResNet(Bottleneck, [3, 8, 36, 3])
+    if pretrained:
+        model.init_weights(152)
+    return model

@@ -24,7 +24,7 @@ class BinaryFocalLoss(nn.Module):
         self._beta = beta
 
     def forward(self, pred: th.Tensor, target: th.Tensor) -> th.Tensor:
-        """Function to calculate loss given prediction and target class heatmaps.
+        """Function to calculate loss given prediction and target class heatmaps. 
 
         Args:
             pred (th.Tensor): Predicted heatmap with shape (batch_size, num_class, output_height, output_width)
@@ -144,7 +144,8 @@ class CenterNet(pl.LightningModule):
             self.parameters(),
             lr=self.hparams.learning_rate,
         )
-        return optimizer
+        lr_scheduler = th.optim.lr_scheduler.MultiStepLR(optimizer, milestones=[15, 40])
+        return [optimizer], [lr_scheduler]
 
     def training_step(self, batch: th.Tensor, batch_idx: int) -> Dict[str, th.Tensor]:
         (image, mask_map_target, cls_map_target, bbox_hw_map_target, offset_map_target),  = batch
