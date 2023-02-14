@@ -18,6 +18,11 @@ For testing the model, run the following command.
 python test_bolts_nuts.py --gpus 1
 ```
 
+Example of training resnet18 with bolts and nuts dataset using default hyperparameters, 
+
+![Training Loss](images/loss.png)
+![MAP over Validation Dataset](images/map.png)
+
 ## Inference
 For inference, you should use one of checkpoints (for below example, 
 ![checkpoints](/checkpoints) folder)
@@ -57,6 +62,14 @@ python demo.py
 Current trained model have following output in test set (bolts and nuts).
 
 ![Expected Output](images/demo.gif)
+
+## Possible future improvements
+This package is a new one, so some features extra features to be added.
+
+- [] Implement more augmentations in dataset classes. (Waiting for new version of torchvision)
+- [] Handle COCO dataset
+- [] Implement other backbones other than ResNet, like Hourglass, swin transformer etc. 
+
 
 ## References
 - [Objects as Points](https://arxiv.org/pdf/1911.02116.pdf)
