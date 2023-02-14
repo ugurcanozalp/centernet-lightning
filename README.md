@@ -40,7 +40,7 @@ from centernet import ObjectDetector
 image = Image.open("images/test_0336.jpg") 
 image = np.asarray(image) # PIL image to numpy array
 detector = ObjectDetector("deployments/centernet_resnet18_quantized.onnx")
-batch_ids, boxes, scores, labels = detector(image)
+batch_ids, boxes, scores, labels = detector([image])
 ```
 
 ### ONNX real-time demo

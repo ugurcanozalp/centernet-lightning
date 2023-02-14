@@ -16,11 +16,11 @@ class ObjectDetector():
         self.stride = int(meta["stride"])
         self.input_shape = np.array([int(meta["input_height"]), int(meta["input_width"])])
 
-    def __call__(self, image: np.ndarray) -> Tuple[np.ndarray]:
+    def __call__(self, images: List[np.ndarray]) -> Tuple[np.ndarray]:
         """Function to infer objects given in the BGR image. 
 
         Args:
-            image (np.ndarray): 2D Image arrays values between [0-1] with RGB format. 
+            image (np.ndarray): List of 2D Image arrays values between [0-1] with RGB format. 
 
         Returns:
             batch_ids (th.Tensor): Given an index, it specifies batch index of the detected object. 
@@ -28,9 +28,9 @@ class ObjectDetector():
             scores (th.Tensor): Prediction score of the object class. 
             batch_ids (th.Tensor): Detected object class. 
         """
-        image_input = cv2.resize(image, self.input_shape)
-        batch = np.expand_dims(image_input.transpose(2, 0, 1), (0, )).astype(np.float32) / 255.0
+        images_input = np.stack([cv2.resize(image, self.input_shape) for image in images], axis=0)
+        batch = images_input.transpose(0, 3, 1, 2).astype(np.float32) / 255.0
         batch_ids, boxes, scores, labels = self.sess.run(None, {"image": batch})
-        ratio = self.stride * np.array(image.shape[:2]) / self.input_shape
-        boxes = (ratio[[1, 0, 1, 0]] * boxes).astype(int)
+        ratio = self.stride * np.array([image.shape[:2] for image in images]) / self.input_shape
+        boxes = (ratio[:, [1, 0, 1, 0]] * boxes).astype(int)
         return batch_ids, boxes, scores, labels

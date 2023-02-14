@@ -29,7 +29,7 @@ while True:
         break
     frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
     # Display the resulting frame and bounding boxes
-    batch_ids, boxes, scores, labels = detector(frame_rgb)
+    batch_ids, boxes, scores, labels = detector([frame_rgb])
     for batch_id, box, score, label in zip(batch_ids, boxes, scores, labels):
         x1, y1, x2, y2 = box
         label_name = detector.class_names[label]
