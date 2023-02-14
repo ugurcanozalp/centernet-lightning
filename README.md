@@ -31,8 +31,13 @@ batch_ids, boxes, scores, labels = model(batch)
 ```
 
 ### Onnx Runtime Inference
-If you want to use onnx runtime, place torch model into ![ner_models/gold_model](/ner_models/gold_model). Then run the **util_scripts/export2onnx.py** script. If you want to convert another model, pass its folder with --model_folder argument. Then, you do inference as follows.
+If you want to use onnx runtime, export the model using `export.py`. 
 
+```
+python -m scripts.export --ckpt checkpoints/centernet_resnet18.pt.ckpt --quantized
+```
+
+Then, you do inference as follows.
 ```python
 import numpy as np
 from PIL import Image
